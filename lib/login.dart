@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import "./register.dart";
+import "./main.dart";
 
 class LoginPage extends StatefulWidget {
   @override
@@ -20,19 +22,24 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(children: [
-        TextField(
-          controller: emailController,
-          textInputAction: TextInputAction.next,
-          decoration: const InputDecoration(label: Text("email")),
-        ),
-        TextField(
-          controller: passwordController,
-          textInputAction: TextInputAction.next,
-          decoration: const InputDecoration(label: Text("password")),
-        ),
-        ElevatedButton(onPressed: _login, child: Text("login"))
-      ]),
-    );
+        child: Column(children: [
+      TextField(
+        controller: emailController,
+        textInputAction: TextInputAction.next,
+        decoration: const InputDecoration(label: Text("email")),
+      ),
+      TextField(
+        controller: passwordController,
+        textInputAction: TextInputAction.next,
+        decoration: const InputDecoration(label: Text("password")),
+      ),
+      ElevatedButton(onPressed: _login, child: Text("login")),
+      ElevatedButton(
+          onPressed: () {
+            // Navigate to the second screen using a named route.
+            Navigator.pushNamed(context, '/register');
+          },
+          child: Text("register"))
+    ]));
   }
 }

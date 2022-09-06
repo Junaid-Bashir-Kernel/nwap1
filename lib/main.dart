@@ -1,20 +1,17 @@
 import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
 import "./login.dart";
+import "./tabss.dart";
+import "./register.dart";
 
 Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
-}
-
-Future _logout() async {
-  await FirebaseAuth.instance.signOut();
 }
 
 class MyApp extends StatelessWidget {
@@ -25,6 +22,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      initialRoute: '/login',
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        //'/login': (context) => LoginPage(),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        '/register': (context) => RegisterPage(),
+      },
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -52,12 +56,16 @@ class MainPage extends StatelessWidget {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        body: Center(
-      child: FloatingActionButton(
-        onPressed: _logout,
-        child: Text("logout"),
-      ),
-    ));
+    return Scaffold(
+      body: Center(
+        child: TabBarview(),
+      ), //Center(
+      //child: FloatingActionButton(
+      //onPressed: _logout,
+      //child: Text("logout"),
+      //),
+
+      //)
+    );
   }
 }
